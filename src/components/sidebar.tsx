@@ -21,13 +21,16 @@ const RouteItem = ({
   route: { name: string; icon: ReactNode; url: string; description?: string };
 }) => {
   const pathname = usePathname();
-  const active = route.url === "/" ? pathname === route.url : pathname.startsWith(route.url);
+  const active =
+    route.url === "/" ? pathname === route.url : pathname.startsWith(route.url);
 
   return (
     <Link
       title={route.description}
       href={route.url}
-      className={`p-4 group transition-all hover:bg-blue-400/40 rounded-full ${active ? 'bg-cyan-600': 'bg-transparent'}`}
+      className={`p-4 group transition-all hover:bg-blue-400/40 rounded-full ${
+        active ? "bg-cyan-600" : "bg-transparent"
+      }`}
     >
       <div>{route.icon}</div>
     </Link>

@@ -13,6 +13,7 @@ import "highlight.js/styles/dark.css";
 import "react-toastify/dist/ReactToastify.css";
 import { LoadingContextProvider } from "@/contexts/loading";
 import ApplicationContextProvider from "@/contexts/application";
+import Configuration from "@/components/configuration";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -61,6 +62,7 @@ export default function RootLayout({
               />
               <div className="flex flex-1">{children}</div>
             </div>
+            <Configuration />
           </LoadingContextProvider>
         </ApplicationContextProvider>
         <ToastContainer

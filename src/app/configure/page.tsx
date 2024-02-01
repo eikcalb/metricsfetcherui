@@ -1,23 +1,22 @@
 "use client";
 
+import Footer from "@/components/footer";
 import { APPLICATION_CONTEXT } from "@/contexts/application";
 import { LOADING_CONTEXT } from "@/contexts/loading";
 import { json, jsonParseLinter } from "@codemirror/lang-json";
 import { githubDark } from "@uiw/codemirror-theme-github";
 import CodeMirror, { ReactCodeMirrorRef } from "@uiw/react-codemirror";
 import { useRouter } from "next/navigation";
-import { HiCheck } from "react-icons/hi2";
-import { toast } from "react-toastify";
 import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  startTransition,
-  useMemo,
 } from "react";
-import Footer from "@/components/footer";
+import { HiCheck } from "react-icons/hi2";
+import { toast } from "react-toastify";
 
 const jsonLinter = jsonParseLinter();
 
@@ -65,6 +64,10 @@ export default function Configuration() {
 
   useEffect(() => {
     if (!isInitRef.current) {
+      toast(
+        "Changes made to the configuration will require a restart to take effect",
+        { type: "info" }
+      );
       fetchConfig();
       isInitRef.current = true;
     }
@@ -91,6 +94,7 @@ export default function Configuration() {
           height="400pt"
           extensions={[json()]}
           onChange={onChange}
+          className="z-10"
         />
         <div className="flex space-x-8 items-start justify-between">
           <div className="flex items-center flex-grow self-center">
@@ -102,7 +106,11 @@ export default function Configuration() {
           </div>
           <button
             disabled={!hasCodeChanged}
-            title={hasCodeChanged ? `Save configuration` : `Update the configuration in to enable button`}
+            title={
+              hasCodeChanged
+                ? `Save configuration`
+                : `Update the configuration in to enable button`
+            }
             onClick={async () => {
               loading.setLoading(true);
               const ok = global.confirm(

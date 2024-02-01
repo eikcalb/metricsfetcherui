@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+a[target="_blank"]::after {
+  content: "↗";
+  color: cyan;
+  margin-left: 0.2rem;
+}

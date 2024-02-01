@@ -61,7 +61,7 @@ export default function Scripting() {
 
         <div className="gap-4 grid md:grid-cols-3">
           {value?.map((script) => (
-            <Link href={`/scripting/details?name=${script.name}`} key={script.name} className="auto- p-4 bg-sky-600 hover:bg-sky-500 rounded-xl flex flex-col">
+            <Link href={`/scripting/details?name=${script.name}`} key={script.name} className="auto-cols-auto p-4 bg-sky-600 hover:bg-sky-500 rounded-xl flex flex-col">
               <div>
                 <span className="text-lg">Name: {script.name}</span>
               </div>
